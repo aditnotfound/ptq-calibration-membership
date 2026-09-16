@@ -1,0 +1,38 @@
+seed: 20260901
+
+# Exact-population GPTQ arm. configs/matched_autoround.yaml uses the same population seed,
+# record seed, record generator, candidates, references, backgrounds, and membership matrix.
+gptq_attack:
+  model: facebook/opt-125m
+  seed: 20260901
+  record_seed: 20260902
+  calibration_size: 128
+  sequence_length: 512
+  bits: 4
+  targets: 32
+  reference_records: 16
+  shadow_artifacts: 32
+  test_artifacts: 16
+  pool_size: 1024
+  group_size: 128
+  pipeline: sequential
+  ignore: [lm_head]
+  record_source: synthetic
+  record_vocabulary_size: 4096
+  record_topic_size: 96
+  record_concentration: 0.4
+  record_nonce_length: 0
+  score_chunk: 4
+  output_chunk: 2
+  track_changed_fraction: false
+  max_new_artifacts: 1
+  manifest: results/matched_gptq_population.json
+  scores: results/matched_gptq_scores.jsonl
+  report: reports/matched_gptq_report.md
+  logistic_regularization: [1.0, 0.1, 0.01, 0.001]
+  candidate_crossfit_folds: 2
+  candidate_crossfit_seed: 20260903
+  bootstrap_replicates: 1000
+  bootstrap_seed: 20260904
+  randomization_replicates: 10000
+  randomization_seed: 20260905

@@ -1,0 +1,53 @@
+{
+  "checked_utc": "2026-09-16T12:50:54.772685+00:00",
+  "scope": "Unchanged original supplement test suite on CPU; no model/data downloads or GPU reproduction.",
+  "suite": {
+    "total": 28,
+    "passed": 25,
+    "failed": 2,
+    "skipped": 1,
+    "failures": [
+      {
+        "test": "tests.test_awq_attack::test_awq_registered_recipe_rejects_nonstandard_shape_before_loading_model",
+        "reason": "Optional llmcompressor dependency absent"
+      },
+      {
+        "test": "tests.test_manuscript::test_abstract_respects_style_contract",
+        "reason": "Original paper/sections/abstract.tex absent from supplied archive"
+      }
+    ],
+    "skipped_tests": [
+      "tests.test_autoround_attack::test_reconstruction_scores_accept_cpu_weights_for_a_cuda_base"
+    ]
+  },
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Windows",
+    "packages": {
+      "numpy": "2.5.3",
+      "scikit-learn": "1.7.2",
+      "torch": "2.8.0+cpu",
+      "pytest": "8.4.2",
+      "PyYAML": "6.0.3",
+      "pyarrow": "21.0.0",
+      "Pillow": "12.3.0"
+    }
+  },
+  "additional_checks": {
+    "cli_help_exit_code": 0,
+    "explicit_cpu_subset": {
+      "passed": 25,
+      "skipped": 1,
+      "failed": 0,
+      "excluded_files": [
+        "tests/test_awq_attack.py",
+        "tests/test_manuscript.py"
+      ]
+    }
+  },
+  "limitations": [
+    "Historical numeric reports not recomputed from raw scores.",
+    "GPU/CUDA and optional named-library quantization not validated.",
+    "Missing manuscript test was preserved, not bypassed in the full-suite run."
+  ]
+}

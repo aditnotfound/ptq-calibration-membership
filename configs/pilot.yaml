@@ -1,0 +1,50 @@
+seed: 20260822
+
+paths:
+  data_dir: data
+  artifact_dir: artifacts
+  result_dir: results
+  base_checkpoint: artifacts/base/resnet18_cifar100.pt
+  split_manifest: artifacts/base/cifar100_split_manifest.json
+
+data:
+  train_per_class: 400
+  calibration_per_class: 100
+  split_seed: 20260822
+
+train:
+  epochs: 100
+  batch_size: 128
+  eval_batch_size: 512
+  learning_rate: 0.1
+  momentum: 0.9
+  weight_decay: 0.0005
+  num_workers: 0
+  label_smoothing: 0.0
+
+quantization:
+  bits: 4
+  calibration_sizes: [32, 128]
+  targets: 6
+  backgrounds_per_target: 4
+  calibration_batch_size: 32
+  hessian_patches_per_image: 4
+  damping: 0.01
+  block_size: 128
+  quantize_linear: true
+  save_artifacts: true
+  determinism_check: true
+  evaluate_first_pair: true
+
+attack:
+  calibration_size: 128
+  targets: 64
+  shadow_artifacts: 72
+  test_artifacts: 24
+  calibration_batch_size: 32
+  artifact_dir: artifacts/attack_n128
+  manifest: results/attack_n128_population.json
+  scores: results/attack_n128_scores.npz
+  report: reports/attack_n128_report.md
+  bootstrap_replicates: 1000
+  bootstrap_seed: 20260824

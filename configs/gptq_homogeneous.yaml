@@ -1,0 +1,31 @@
+seed: 20260830
+
+# Same GPTQ population design as configs/gptq.yaml, but calibration records are exchangeable
+# draws from one shared token distribution instead of records with private topic vocabularies.
+# This is the hard test: if membership survives here, the effect is not a canary artifact.
+gptq_attack:
+  model: facebook/opt-125m
+  seed: 20260830
+  calibration_size: 128
+  sequence_length: 512
+  targets: 32
+  reference_records: 16
+  shadow_artifacts: 32
+  test_artifacts: 16
+  pool_size: 1024
+  group_size: 128
+  pipeline: sequential
+  ignore: [lm_head]
+  # Every record covers essentially the whole vocabulary with near-identical token frequencies,
+  # so records differ only by sampling noise, the way samples from one corpus do.
+  record_vocabulary_size: 512
+  record_topic_size: 512
+  record_concentration: 50.0
+  score_chunk: 4
+  output_chunk: 2
+  manifest: results/gptq_homogeneous_population.json
+  scores: results/gptq_homogeneous_scores.jsonl
+  report: reports/gptq_homogeneous_report.md
+  logistic_regularization: [1.0, 0.1, 0.01, 0.001]
+  bootstrap_replicates: 1000
+  bootstrap_seed: 20260831

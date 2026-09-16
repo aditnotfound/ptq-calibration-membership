@@ -1,0 +1,67 @@
+{
+  "artifact_auroc_range": [
+    0.9999923706054688,
+    1.0
+  ],
+  "candidate_crossfit_artifact_auroc_range": [
+    0.9989013671875,
+    0.9999818801879883
+  ],
+  "exact_candidate_or_reference_overlap_across_populations": 0,
+  "independent_populations": 3,
+  "protocol": "three independently constructed record pools, candidate sets, background sets, fixed-margin membership matrices, shadow artifacts, and test artifacts",
+  "raw_fixed_auroc_range": [
+    0.6684455871582031,
+    0.6745948791503906
+  ],
+  "record_disjointness_report": "reports\\gptq_population_record_disjointness.json",
+  "rows": [
+    {
+      "artifact_auroc": 1.0,
+      "candidate_crossfit_artifact_auroc": 0.9999818801879883,
+      "minimum_crossfit_per_artifact_auroc": 1.0,
+      "minimum_per_artifact_auroc": 1.0,
+      "population": "original",
+      "population_sha256": "f2dadc85c4fc75300397fe4f1562efdc60d90becb7f717d0554d1e81f8f4f765",
+      "raw_fixed_auroc": 0.6731691360473633,
+      "record_pool_sha256": "0f507b9770faeaeb93f062886772c8728eb57429226fb5d0532c26727f5f7e84",
+      "report": "reports\\gptq_natural_postcutoff_report.json",
+      "selected_artifact_feature": "artifact_layer_combination",
+      "shadow_artifacts": 32,
+      "test_artifacts": 32,
+      "test_decisions": 2048
+    },
+    {
+      "artifact_auroc": 1.0,
+      "candidate_crossfit_artifact_auroc": 0.9999465942382812,
+      "minimum_crossfit_per_artifact_auroc": 0.9990234375,
+      "minimum_per_artifact_auroc": 1.0,
+      "population": "fresh 1",
+      "population_sha256": "77f26fe7d76302d3d9d3150975489be515bc901ee3c3dbbe6e79b115f5bedfcc",
+      "raw_fixed_auroc": 0.6684455871582031,
+      "record_pool_sha256": "1a81196b54ad7d254d65bbc28fb10b9fa0be4e91c64b6ada0d5c73128d71e5b5",
+      "report": "reports\\gptq_natural_fresh1_report.json",
+      "selected_artifact_feature": "artifact_layer_combination",
+      "shadow_artifacts": 16,
+      "test_artifacts": 16,
+      "test_decisions": 1024
+    },
+    {
+      "artifact_auroc": 0.9999923706054688,
+      "candidate_crossfit_artifact_auroc": 0.9989013671875,
+      "minimum_crossfit_per_artifact_auroc": 0.99609375,
+      "minimum_per_artifact_auroc": 1.0,
+      "population": "fresh 2",
+      "population_sha256": "af617294cb0fa26987775cbb6bd40fa449918a30caf607d46db4baeaf7430427",
+      "raw_fixed_auroc": 0.6745948791503906,
+      "record_pool_sha256": "9803310009dad256c7570ea35ac594ac1431c6613eac0c71fd0fc1ef2e54aa01",
+      "report": "reports\\gptq_natural_fresh2_report.json",
+      "selected_artifact_feature": "artifact_reconstruction",
+      "shadow_artifacts": 16,
+      "test_artifacts": 16,
+      "test_decisions": 1024
+    }
+  ],
+  "total_quantized_artifacts": 128,
+  "total_test_decisions": 4096
+}

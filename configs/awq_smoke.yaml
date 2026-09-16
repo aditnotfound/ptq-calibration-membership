@@ -1,0 +1,42 @@
+seed: 20261011
+
+# One-artifact engineering validation. This configuration is never used as paper evidence.
+awq_attack:
+  model: facebook/opt-125m
+  model_revision: 27dcfa74d334bc871f3234de431e71c6eeba5dd6
+  model_dtype: float16
+  seed: 20261011
+  record_seed: 20261012
+  calibration_size: 16
+  sequence_length: 128
+  bits: 4
+  targets: 4
+  reference_records: 2
+  shadow_artifacts: 4
+  test_artifacts: 2
+  pool_size: 64
+  group_size: 128
+  pipeline: sequential
+  ignore: [lm_head]
+  duo_scaling: both
+  n_grid: 4
+  record_source: synthetic
+  record_vocabulary_size: 512
+  record_topic_size: 512
+  record_concentration: 50.0
+  record_nonce_length: 0
+  score_chunk: 2
+  output_chunk: 1
+  reconstruction_compute_dtype: float32
+  track_changed_fraction: false
+  max_new_artifacts: 1
+  manifest: results/smoke/awq_population.json
+  scores: results/smoke/awq_scores.jsonl
+  report: reports/smoke_awq_attack.md
+  logistic_regularization: [1.0, 0.1]
+  candidate_crossfit_folds: 2
+  candidate_crossfit_seed: 20261013
+  bootstrap_replicates: 20
+  bootstrap_seed: 20261014
+  randomization_replicates: 100
+  randomization_seed: 20261015

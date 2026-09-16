@@ -1,0 +1,11 @@
+autoround_attack:
+  manifest: results/autoround_iters50_population.json
+  scores: results/autoround_iters50_scores.jsonl
+  report: reports/autoround_iters50_report.md
+  logistic_regularization: [1.0, 0.1, 0.01, 0.001]
+  candidate_crossfit_folds: 2
+  candidate_crossfit_seed: 20260830
+  bootstrap_replicates: 1000
+  bootstrap_seed: 20260831
+  randomization_replicates: 10000
+  randomization_seed: 20260832

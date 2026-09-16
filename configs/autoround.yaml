@@ -1,0 +1,25 @@
+seed: 20260828
+
+# Named-library replication: Intel auto-round W4A16 on a public OPT checkpoint.
+# The calibration pool is synthetic, so calibration records provably never trained the base model.
+autoround_attack:
+  model: facebook/opt-125m
+  seed: 20260828
+  calibration_size: 128
+  sequence_length: 512
+  targets: 32
+  reference_records: 16
+  shadow_artifacts: 32
+  test_artifacts: 16
+  pool_size: 1024
+  batch_size: 4
+  iters: 200
+  per_artifact_quantizer_seed: false
+  score_chunk: 4
+  output_chunk: 2
+  manifest: results/autoround_attack_population.json
+  scores: results/autoround_attack_scores.jsonl
+  report: reports/autoround_attack_report.md
+  logistic_regularization: [1.0, 0.1, 0.01, 0.001]
+  bootstrap_replicates: 1000
+  bootstrap_seed: 20260829

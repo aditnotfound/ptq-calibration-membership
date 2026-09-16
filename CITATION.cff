@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "Please cite the manuscript and this code repository. Workshop submission does not imply acceptance."
+type: software
+title: "CalibTrace: Calibration Data Leaves a Membership Trace"
+authors:
+  - family-names: Patil
+    given-names: Adit
+repository-code: "https://github.com/aditnotfound/ptq-calibration-membership"
+abstract: "Author-supplied supplementary code for calibration-set membership inference from post-training quantization artifacts."

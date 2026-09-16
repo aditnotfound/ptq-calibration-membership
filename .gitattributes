@@ -1,0 +1,2 @@
+# Preserve the imported byte-level fingerprints across Windows/Linux checkouts.
+* -text whitespace=cr-at-eol

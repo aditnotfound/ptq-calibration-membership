@@ -1,0 +1,41 @@
+seed: 20260921
+
+# Third named PTQ method on the exact natural-text population used by the flagship GPTQ run.
+awq_attack:
+  model: facebook/opt-125m
+  model_revision: 27dcfa74d334bc871f3234de431e71c6eeba5dd6
+  model_dtype: float16
+  seed: 20260921
+  record_seed: 20260922
+  calibration_size: 128
+  sequence_length: 512
+  bits: 4
+  targets: 64
+  reference_records: 16
+  shadow_artifacts: 32
+  test_artifacts: 32
+  pool_size: 1024
+  group_size: 128
+  pipeline: sequential
+  ignore: [lm_head]
+  duo_scaling: both
+  n_grid: 20
+  record_source: text_jsonl
+  record_text_path: data/arxiv_cs_lg_2024.jsonl
+  record_text_field: text
+  record_published_after: "2023-12-31T23:59:59Z"
+  score_chunk: 4
+  output_chunk: 2
+  reconstruction_compute_dtype: float32
+  track_changed_fraction: false
+  max_new_artifacts: 1
+  manifest: results/awq_natural_postcutoff_population.json
+  scores: results/awq_natural_postcutoff_scores.jsonl
+  report: reports/awq_natural_postcutoff_report.md
+  logistic_regularization: [1.0, 0.1, 0.01, 0.001]
+  candidate_crossfit_folds: 2
+  candidate_crossfit_seed: 20260923
+  bootstrap_replicates: 1000
+  bootstrap_seed: 20260924
+  randomization_replicates: 10000
+  randomization_seed: 20260925

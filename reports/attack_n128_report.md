@@ -1,0 +1,265 @@
+# CalibTrace single-artifact attack report
+
+Evaluation uses 72 shadow artifacts, 24 completely held-out artifacts, and 64 candidate records at W4/N=128.
+
+| Feature | AUROC | ROC TPR @ FPR<=1% | ROC TPR @ zero observed FP |
+|---|---:|---:|---:|
+| artifact_reconstruction | 0.9631 | 0.7682 | 0.6628 |
+| output_logit_mse | 0.9063 | 0.3958 | 0.2409 |
+| output_kl | 0.5836 | 0.0065 | 0.0013 |
+| output_true_logprob | 0.5564 | 0.0130 | 0.0000 |
+
+The held-out set has 768 nonmembers, so its empirical FPR resolution is 0.130%. The final column is the zero-observed-false-positive point; it must not be read as a resolved 0.1% estimate.
+
+## Shadow-calibrated operating points
+
+Thresholds below are selected using shadow nonmembers only and then frozen before evaluation on held-out artifacts.
+
+| Feature | Target FPR | Shadow FPR | Test FPR | Test TPR |
+|---|---:|---:|---:|---:|
+| artifact_reconstruction | 1% | 0.0100 | 0.0143 | 0.8190 |
+| artifact_reconstruction | 0.1% | 0.0009 | 0.0000 | 0.4258 |
+| output_logit_mse | 1% | 0.0100 | 0.0208 | 0.4349 |
+| output_logit_mse | 0.1% | 0.0009 | 0.0000 | 0.2292 |
+| output_kl | 1% | 0.0100 | 0.0117 | 0.0091 |
+| output_kl | 0.1% | 0.0009 | 0.0013 | 0.0026 |
+| output_true_logprob | 1% | 0.0100 | 0.0104 | 0.0130 |
+| output_true_logprob | 0.1% | 0.0009 | 0.0052 | 0.0026 |
+
+Artifact minus output-logit-MSE AUROC: 0.0568.
+
+Full crossed target/artifact bootstrap intervals and metadata:
+
+```json
+{
+  "artifact_minus_output_logit_mse_auroc": 0.05680677625868058,
+  "cluster_bootstrap": {
+    "artifact_minus_output_logit_mse_auroc": {
+      "lower_95": 0.009419453013672741,
+      "upper_95": 0.09505346892333068
+    },
+    "artifact_reconstruction": {
+      "auroc": {
+        "lower_95": 0.9169489492066026,
+        "upper_95": 0.9920001198456891
+      },
+      "tpr_at_0_1pct_fpr": {
+        "lower_95": 0.5687356967832384,
+        "upper_95": 0.8335732121891811
+      },
+      "tpr_at_1pct_fpr": {
+        "lower_95": 0.6537228709181931,
+        "upper_95": 0.9160889050387596
+      }
+    },
+    "output_kl": {
+      "auroc": {
+        "lower_95": 0.5291376338754405,
+        "upper_95": 0.6326965279779061
+      },
+      "tpr_at_0_1pct_fpr": {
+        "lower_95": 0.0,
+        "upper_95": 0.013919977819593289
+      },
+      "tpr_at_1pct_fpr": {
+        "lower_95": 0.0,
+        "upper_95": 0.055203180358954725
+      }
+    },
+    "output_logit_mse": {
+      "auroc": {
+        "lower_95": 0.8783788564756448,
+        "upper_95": 0.9297906607976576
+      },
+      "tpr_at_0_1pct_fpr": {
+        "lower_95": 0.19525783552842207,
+        "upper_95": 0.4296502131653437
+      },
+      "tpr_at_1pct_fpr": {
+        "lower_95": 0.2735371230715288,
+        "upper_95": 0.5177398160315374
+      }
+    },
+    "output_true_logprob": {
+      "auroc": {
+        "lower_95": 0.5052919509281232,
+        "upper_95": 0.6084046952600565
+      },
+      "tpr_at_0_1pct_fpr": {
+        "lower_95": 0.0,
+        "upper_95": 0.011833299775338047
+      },
+      "tpr_at_1pct_fpr": {
+        "lower_95": 0.0,
+        "upper_95": 0.03562445680059477
+      }
+    }
+  },
+  "empirical_test_fpr_resolution": 0.0013020833333333333,
+  "metrics": {
+    "artifact_reconstruction": {
+      "auroc": 0.9630703396267363,
+      "tpr_at_0_1pct_fpr": 0.6627604166666666,
+      "tpr_at_1pct_fpr": 0.7682291666666666
+    },
+    "output_kl": {
+      "auroc": 0.5835622151692709,
+      "tpr_at_0_1pct_fpr": 0.0013020833333333333,
+      "tpr_at_1pct_fpr": 0.006510416666666667
+    },
+    "output_logit_mse": {
+      "auroc": 0.9062635633680557,
+      "tpr_at_0_1pct_fpr": 0.24088541666666666,
+      "tpr_at_1pct_fpr": 0.3958333333333333
+    },
+    "output_true_logprob": {
+      "auroc": 0.5563871595594618,
+      "tpr_at_0_1pct_fpr": 0.0,
+      "tpr_at_1pct_fpr": 0.013020833333333334
+    }
+  },
+  "per_target_auroc": {
+    "artifact_reconstruction": {
+      "lower_quartile": 0.923611111111111,
+      "maximum": 1.0,
+      "median": 0.9791666666666666,
+      "minimum": 0.7430555555555557,
+      "targets_above_chance": 64,
+      "targets_at_least_0_9": 54,
+      "upper_quartile": 1.0
+    },
+    "output_kl": {
+      "lower_quartile": 0.5,
+      "maximum": 0.875,
+      "median": 0.5972222222222222,
+      "minimum": 0.2708333333333333,
+      "targets_above_chance": 46,
+      "targets_at_least_0_9": 0,
+      "upper_quartile": 0.6597222222222223
+    },
+    "output_logit_mse": {
+      "lower_quartile": 0.873263888888889,
+      "maximum": 1.0,
+      "median": 0.9236111111111112,
+      "minimum": 0.6597222222222223,
+      "targets_above_chance": 64,
+      "targets_at_least_0_9": 42,
+      "upper_quartile": 0.9583333333333333
+    },
+    "output_true_logprob": {
+      "lower_quartile": 0.4835069444444444,
+      "maximum": 0.8402777777777777,
+      "median": 0.5555555555555556,
+      "minimum": 0.22916666666666666,
+      "targets_above_chance": 44,
+      "targets_at_least_0_9": 0,
+      "upper_quartile": 0.6163194444444444
+    }
+  },
+  "shadow_artifacts": 72,
+  "shadow_calibrated_operating_points": {
+    "artifact_reconstruction": {
+      "0_1pct_target_fpr": {
+        "allowed_shadow_false_positives": 2,
+        "shadow_false_positives": 2,
+        "shadow_fpr": 0.0008680555555555555,
+        "target_fpr": 0.001,
+        "test_false_positives": 0,
+        "test_fpr": 0.0,
+        "test_tpr": 0.42578125,
+        "test_true_positives": 327,
+        "threshold": 1.7171359545542986
+      },
+      "1pct_target_fpr": {
+        "allowed_shadow_false_positives": 23,
+        "shadow_false_positives": 23,
+        "shadow_fpr": 0.009982638888888888,
+        "target_fpr": 0.01,
+        "test_false_positives": 11,
+        "test_fpr": 0.014322916666666666,
+        "test_tpr": 0.8190104166666666,
+        "test_true_positives": 629,
+        "threshold": 0.7481541752916122
+      }
+    },
+    "output_kl": {
+      "0_1pct_target_fpr": {
+        "allowed_shadow_false_positives": 2,
+        "shadow_false_positives": 2,
+        "shadow_fpr": 0.0008680555555555555,
+        "target_fpr": 0.001,
+        "test_false_positives": 1,
+        "test_fpr": 0.0013020833333333333,
+        "test_tpr": 0.0026041666666666665,
+        "test_true_positives": 2,
+        "threshold": 3.392930138974222
+      },
+      "1pct_target_fpr": {
+        "allowed_shadow_false_positives": 23,
+        "shadow_false_positives": 23,
+        "shadow_fpr": 0.009982638888888888,
+        "target_fpr": 0.01,
+        "test_false_positives": 9,
+        "test_fpr": 0.01171875,
+        "test_tpr": 0.009114583333333334,
+        "test_true_positives": 7,
+        "threshold": 1.4695820367456307
+      }
+    },
+    "output_logit_mse": {
+      "0_1pct_target_fpr": {
+        "allowed_shadow_false_positives": 2,
+        "shadow_false_positives": 2,
+        "shadow_fpr": 0.0008680555555555555,
+        "target_fpr": 0.001,
+        "test_false_positives": 0,
+        "test_fpr": 0.0,
+        "test_tpr": 0.22916666666666666,
+        "test_true_positives": 176,
+        "threshold": 1.5552028617510014
+      },
+      "1pct_target_fpr": {
+        "allowed_shadow_false_positives": 23,
+        "shadow_false_positives": 23,
+        "shadow_fpr": 0.009982638888888888,
+        "target_fpr": 0.01,
+        "test_false_positives": 16,
+        "test_fpr": 0.020833333333333332,
+        "test_tpr": 0.4348958333333333,
+        "test_true_positives": 334,
+        "threshold": 1.1669121414834098
+      }
+    },
+    "output_true_logprob": {
+      "0_1pct_target_fpr": {
+        "allowed_shadow_false_positives": 2,
+        "shadow_false_positives": 2,
+        "shadow_fpr": 0.0008680555555555555,
+        "target_fpr": 0.001,
+        "test_false_positives": 4,
+        "test_fpr": 0.005208333333333333,
+        "test_tpr": 0.0026041666666666665,
+        "test_true_positives": 2,
+        "threshold": 2.927749011049039
+      },
+      "1pct_target_fpr": {
+        "allowed_shadow_false_positives": 23,
+        "shadow_false_positives": 23,
+        "shadow_fpr": 0.009982638888888888,
+        "target_fpr": 0.01,
+        "test_false_positives": 8,
+        "test_fpr": 0.010416666666666666,
+        "test_tpr": 0.013020833333333334,
+        "test_true_positives": 10,
+        "threshold": 2.2569438738821943
+      }
+    }
+  },
+  "targets": 64,
+  "test_artifacts": 24,
+  "test_decisions": 1536,
+  "test_members": 768,
+  "test_nonmembers": 768,
+  "threat_model": "public base, known quantizer, one held-out released artifact"
+}
+```

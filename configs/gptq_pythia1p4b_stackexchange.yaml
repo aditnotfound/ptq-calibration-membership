@@ -1,0 +1,42 @@
+seed: 20261101
+
+# Larger-model, independent-domain replication. Every question was created in 2025, after the
+# Pythia suite and its fixed training corpus were released. Posts retain URLs and author metadata.
+gptq_attack:
+  model: EleutherAI/pythia-1.4b
+  model_revision: fedc38a16eea3bd36a96b906d78d11d2ce18ed79
+  model_dtype: bfloat16
+  seed: 20261101
+  record_seed: 20261102
+  calibration_size: 128
+  sequence_length: 512
+  bits: 4
+  targets: 64
+  reference_records: 16
+  shadow_artifacts: 32
+  test_artifacts: 32
+  pool_size: 1024
+  group_size: 128
+  pipeline: sequential
+  dampening_frac: 0.01
+  offload_hessians: false
+  ignore: [lm_head, embed_out]
+  record_source: text_jsonl
+  record_text_path: data/stackexchange_questions_2025.jsonl
+  record_text_field: text
+  record_published_after: "2024-12-31T23:59:59Z"
+  score_chunk: 1
+  output_chunk: 1
+  reconstruction_compute_dtype: float32
+  track_changed_fraction: false
+  max_new_artifacts: 1
+  manifest: results/gptq_pythia1p4b_stackexchange_population.json
+  scores: results/gptq_pythia1p4b_stackexchange_scores.jsonl
+  report: reports/gptq_pythia1p4b_stackexchange_report.md
+  logistic_regularization: [1.0, 0.1, 0.01, 0.001]
+  candidate_crossfit_folds: 2
+  candidate_crossfit_seed: 20261103
+  bootstrap_replicates: 1000
+  bootstrap_seed: 20261104
+  randomization_replicates: 10000
+  randomization_seed: 20261105

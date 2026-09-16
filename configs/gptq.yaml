@@ -1,0 +1,25 @@
+seed: 20260830
+
+# Matched named-library replication: llm-compressor GPTQ (one-shot Hessian error compensation),
+# the same mechanism family as the repository's CIFAR quantizer, on a public OPT checkpoint.
+gptq_attack:
+  model: facebook/opt-125m
+  seed: 20260830
+  calibration_size: 128
+  sequence_length: 512
+  targets: 32
+  reference_records: 16
+  shadow_artifacts: 32
+  test_artifacts: 16
+  pool_size: 1024
+  group_size: 128
+  pipeline: sequential
+  ignore: [lm_head]
+  score_chunk: 4
+  output_chunk: 2
+  manifest: results/gptq_attack_population.json
+  scores: results/gptq_attack_scores.jsonl
+  report: reports/gptq_attack_report.md
+  logistic_regularization: [1.0, 0.1, 0.01, 0.001]
+  bootstrap_replicates: 1000
+  bootstrap_seed: 20260831
